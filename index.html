@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dean's Dough — Homemade Focaccia</title>
+<meta name="description" content="Handcrafted focaccia, baked fresh in small batches. Order online, pay by PayNow." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&family=Bebas+Neue&family=Caveat:wght@500;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F3EA;
+    --cream-card:#FFFDF9;
+    --crust:#3A2317;
+    --crust-soft:#5A3A28;
+    --terracotta:#6B3E1F;
+    --terracotta-dark:#8B5E34;
+    --olive:#6B7A4F;
+    --ink:#2B1D14;
+    --line: #E6DCCF;
+    --radius: 18px;
+    --shadow: 0 8px 30px rgba(0,0,0,0.06);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:#F8F3EA;
+    background-image:radial-gradient(circle at top, #FFF9F1, #F4ECE3);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.08rem;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--crust);
+  }
+
+  a{color:inherit;}
+
+  img{max-width:100%; display:block;}
+
+  button{font-family:'Poppins', sans-serif; font-weight:600; cursor:pointer;}
+  :focus-visible{outline:3px solid var(--terracotta); outline-offset:2px;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* HEADER */
+  .site-header{
+    position:sticky; top:0; z-index:40;
+    background:var(--cream-card);
+    color:var(--crust);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1080px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo-block{text-decoration:none; display:flex; flex-direction:column; line-height:1.1;}
+  .logo{
+    font-family:'DM Serif Display', serif; font-weight:400; font-size:1.9rem;
+    color:var(--crust); letter-spacing:-0.01em;
+  }
+  .logo-caption{font-family:'Poppins',sans-serif; font-size:0.6rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--crust-soft); margin-top:3px;}
+  .nav-links{display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    font-family:'Poppins', sans-serif; text-decoration:none; font-size:0.9rem; font-weight:600;
+    color:var(--crust);
+  }
+  .nav-links a:hover{color:var(--terracotta-dark);}
+  .nav-links li.hide-mobile{display:list-item;}
+  @media (max-width:560px){
+    .nav-links li.hide-mobile{display:none;}
+  }
+  .cart-pill{
+    display:flex; align-items:center; gap:6px;
+    background:var(--terracotta); color:#fff; border:none;
+    padding:8px 14px; border-radius:12px; font-weight:600; font-size:0.88rem;
+    transition:0.3s;
+  }
+  .cart-pill:hover{background:var(--terracotta-dark);}
+  .cart-badge{
+    background:#fff; color:var(--terracotta); font-size:0.75rem;
+    border-radius:999px; min-width:18px; height:18px; padding:0 4px;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+  }
+
+  .status-banner{
+    text-align:center; padding:12px 20px; font-weight:600; font-size:0.92rem;
+  }
+  .status-banner.closed{ background:#5A3A28; color:#F4E9D8; }
+  .status-banner.soldout{ background:#C4622D; color:#fff; }
+
+  /* HERO — per latest spec: bg-image, triple-layer overlay, h1/h2 heading structure */
+  .hero{
+    position:relative; overflow:hidden; height:680px;
+    background-image:url('https://jvczydqwyfamswsxxoab.supabase.co/storage/v1/object/public/shop-images/hero-bread_3.jpg');
+    background-size:cover; background-position:center 30%;
+    clip-path:polygon(0 2%, 5% 0, 15% 2%, 30% 1%, 45% 3%, 60% 1%, 75% 2%, 90% 0, 100% 2%, 100% 100%, 0 100%);
+  }
+  .hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(90deg, rgba(15,10,6,.88) 0%, rgba(15,10,6,.72) 20%, rgba(15,10,6,.45) 35%, rgba(15,10,6,.15) 52%, rgba(15,10,6,0) 65%),
+      linear-gradient(to bottom, rgba(0,0,0,.18), transparent 18%),
+      linear-gradient(to top, rgba(0,0,0,.28), transparent 22%);
+  }
+  .hero-content{
+    position:absolute; left:70px; top:120px; z-index:2; max-width:520px; color:#fff;
+  }
+  .hero-content .fresh{
+    font-family:'Caveat', cursive; font-weight:700; color:#FBF4E8;
+    font-size:clamp(1.6rem, 3.2vw, 42px); margin:0; line-height:1.1;
+  }
+  .hero-content .fresh .heart{color:#E7645A;}
+  .hero-content h1{
+    font-family:'Bebas Neue', sans-serif; font-size:clamp(2.8rem, 9vw, 120px);
+    line-height:0.9; letter-spacing:2px; text-transform:uppercase; color:#fff;
+    text-shadow:0 3px 15px rgba(0,0,0,.35); margin:4px 0 0;
+  }
+  .hero-content h2{
+    font-family:'Bebas Neue', sans-serif; font-size:clamp(1.7rem, 5vw, 68px);
+    color:#c69b63; letter-spacing:1px; margin:0 0 6px; font-weight:400;
+  }
+  .hero-content .desc{
+    font-family:'Caveat', cursive; font-weight:700; color:#E7D8BE;
+    font-size:clamp(1.3rem, 2.6vw, 32px); margin-top:10px; line-height:1.3;
+  }
+  .heart-small{color:#E9A25C;}
+
+  .flavour-badge{
+    position:relative; width:150px; height:150px; margin-top:22px; margin-left:6px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .fb-circle{position:absolute; inset:0; width:100%; height:100%;}
+  .fb-text{
+    position:relative; z-index:2; color:#fff; font-family:'Caveat',cursive; font-weight:700;
+    font-size:1.15rem; text-align:center; line-height:1.25; padding:0 14px;
+  }
+  .fb-heart{position:absolute; bottom:20px; color:#fff; font-size:0.9rem;}
+  .fb-arrow{position:absolute; width:60px; height:60px; right:-56px; bottom:-30px; color:#fff; opacity:0.9;}
+
+  .hero-note{
+    position:absolute; top:28px; right:28px; z-index:3; background:#FBF4E8; color:var(--crust);
+    padding:14px 18px; font-family:'Caveat', cursive; font-weight:700; font-size:1.2rem;
+    line-height:1.25; text-align:center; transform:rotate(4deg); box-shadow:0 6px 16px rgba(0,0,0,0.35);
+    border-radius:2px;
+  }
+  .hero-note .heart{color:#E7645A;}
+  .hero-note::before{
+    content:""; position:absolute; top:-10px; left:50%; transform:translateX(-50%) rotate(-3deg);
+    width:50px; height:18px; background:rgba(230,220,200,0.75);
+  }
+  @media (max-width:760px){
+    .hero{height:560px;}
+    .hero-content{left:24px; top:50px; max-width:80%;}
+    .flavour-badge{width:120px; height:120px; margin-top:16px;}
+    .fb-text{font-size:0.92rem;}
+    .fb-arrow{display:none;}
+    .hero-note{top:16px; right:16px; padding:10px 14px; font-size:0.95rem;}
+  }
+
+  /* BADGE ROW — bottom feature strip */
+  .badge-row{
+    position:relative; background:var(--cream-card); padding:34px 0 26px;
+  }
+  .badge-grid{
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:0;
+  }
+  @media (max-width:900px){ .badge-grid{grid-template-columns:repeat(2, 1fr); gap:22px;} }
+  .badge-item{
+    display:flex; align-items:flex-start; gap:10px; padding:0 18px; position:relative;
+  }
+  .badge-item:not(:first-child)::before{
+    content:""; position:absolute; left:0; top:2px; bottom:2px; width:1px; background:var(--line);
+  }
+  @media (max-width:900px){ .badge-item:not(:first-child)::before{display:none;} }
+  .badge-item svg{width:26px; height:26px; flex-shrink:0; color:var(--terracotta); margin-top:2px;}
+  .badge-item strong{font-family:'Poppins',sans-serif; font-size:0.8rem; color:var(--crust); display:block; text-transform:uppercase; letter-spacing:0.02em;}
+  .badge-item p{margin:3px 0 0; font-size:0.85rem; color:var(--crust-soft); line-height:1.4;}
+
+  /* FEATURED */
+  .hero-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--terracotta); color:#fff; text-decoration:none;
+    padding:14px 30px; border-radius:12px; font-family:'Poppins',sans-serif; font-weight:600; font-size:0.98rem;
+    box-shadow:var(--shadow); transition:0.3s;
+  }
+  .hero-cta:hover{background:var(--terracotta-dark);}
+  .featured-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
+  @media (max-width:700px){ .featured-grid{grid-template-columns:1fr;} }
+  .featured-card{
+    background:var(--cream-card); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+  }
+  .featured-card img{width:100%; aspect-ratio:1/0.9; object-fit:cover; display:block;}
+  .featured-card .fc-body{padding:16px;}
+  .featured-card h3{font-size:1rem; margin:0; color:var(--crust);}
+  .featured-card .fc-desc{font-size:0.8rem; color:var(--crust-soft); margin:4px 0 0;}
+  .featured-card .fc-price{font-weight:700; color:var(--terracotta-dark); font-family:'DM Serif Display',serif; margin-top:8px; font-size:1.05rem;}
+
+  /* TORN DIVIDER — signature element: a hand-torn kraft-paper edge between sections */
+  .torn-divider{
+    height:34px; background:var(--cream);
+    background-image:
+      linear-gradient(135deg, var(--crust) 25%, transparent 25%) ,
+      linear-gradient(225deg, var(--crust) 25%, transparent 25%);
+    background-position: 0 0, 12px 0;
+    background-size: 24px 34px;
+    background-repeat: repeat-x;
+    transform: translateY(-1px);
+    margin-top:-1px;
+  }
+
+  /* SECTIONS */
+  section{padding:72px 0;}
+  .section-head{text-align:center; max-width:560px; margin:0 auto 44px;}
+  .eyebrow{
+    display:inline-block; color:var(--olive); font-weight:700; font-size:0.78rem;
+    letter-spacing:0.12em; text-transform:uppercase; margin-bottom:10px;
+  }
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);}
+  .section-head p{margin-top:12px; color:var(--crust-soft); font-size:1rem;}
+
+  /* MENU GRID */
+  .product-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+  }
+  @media (max-width:860px){ .product-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .product-grid{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--cream-card); border-radius:var(--radius); overflow:hidden;
+    box-shadow:var(--shadow); display:flex; flex-direction:column;
+    border:1px solid var(--line);
+  }
+  .card-img{aspect-ratio:4/3; overflow:hidden; background:#e8ddc8;}
+  .card-img img{width:100%; height:100%; object-fit:cover;}
+  .card-body{padding:18px 18px 20px; display:flex; flex-direction:column; gap:10px; flex:1;}
+  .card-body h3{font-size:1.08rem;}
+  .card-ingredients{
+    font-size:0.84rem; color:var(--crust-soft); margin:0; flex:1;
+  }
+  .card-footer{
+    display:flex; align-items:center; justify-content:space-between; margin-top:auto;
+  }
+  .price{font-weight:700; color:var(--terracotta-dark); font-size:1.05rem; font-family:'DM Serif Display',serif;}
+  .qty-stepper{display:flex; align-items:center; gap:10px;}
+  .step-btn{
+    width:30px; height:30px; border-radius:50%; border:1px solid var(--line);
+    background:#fff; font-weight:700; font-size:1rem; display:flex; align-items:center; justify-content:center; padding:0;
+  }
+  .step-btn:hover{background:#f3ead9;}
+  .step-val{font-weight:700; min-width:18px; text-align:center; font-size:0.95rem;}
+  .add-btn{
+    background:var(--terracotta); color:#fff; border:none; border-radius:12px;
+    padding:14px 16px; font-family:'Poppins',sans-serif; font-weight:600; font-size:0.9rem; width:100%; margin-top:12px;
+    transition:0.3s;
+  }
+  .add-btn:hover{background:var(--terracotta-dark);}
+  .add-btn.added{background:var(--olive);}
+  .add-btn[disabled]{background:#C9BCA6; color:#fff; cursor:not-allowed;}
+  .card.sold-out .card-img{position:relative;}
+  .card.sold-out .card-img img{filter:grayscale(0.6) brightness(0.85);}
+  .sold-out-badge{
+    position:absolute; top:10px; left:10px; background:var(--crust); color:#fff;
+    font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:999px;
+    letter-spacing:0.03em;
+  }
+
+  /* HOW IT WORKS */
+  .how-section{background:#F1E7D4;}
+  .steps{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  @media (max-width:860px){ .steps{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .steps{grid-template-columns:1fr;} }
+  .step{
+    background:var(--cream-card); border-radius:var(--radius); padding:22px 20px;
+    border:1px solid var(--line);
+  }
+  .step-num{
+    width:34px; height:34px; border-radius:50%; background:var(--terracotta);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:'DM Serif Display',serif; margin-bottom:14px;
+  }
+  .step h3{font-size:1rem; margin-bottom:6px;}
+  .step p{font-size:0.88rem; color:var(--crust-soft); margin:0;}
+
+  /* ABOUT */
+  .about-section .wrap{
+    display:flex; align-items:center; gap:48px; flex-wrap:wrap;
+  }
+  .about-text{flex:1; min-width:260px;}
+  .about-text p{color:var(--crust-soft); font-size:1.02rem; margin-top:14px;}
+  .ig-link{
+    display:inline-flex; align-items:center; gap:8px; margin-top:18px;
+    text-decoration:none; font-weight:600; color:var(--terracotta-dark);
+  }
+
+  /* WHATSAPP BAR */
+  .whatsapp-bar{background:#F1E7D4; padding:22px 0;}
+  .whatsapp-bar .wrap{display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; text-align:center;}
+  .whatsapp-bar span{font-weight:600; color:var(--crust); font-size:0.95rem;}
+
+  /* FOOTER */
+  footer{
+    background:var(--crust); color:#D9C9AC; padding:44px 0 24px; font-size:0.88rem;
+  }
+  .footer-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; padding-bottom:28px;}
+  @media (max-width:600px){ .footer-grid{grid-template-columns:1fr;} }
+  .footer-col{display:flex; flex-direction:column; gap:10px;}
+  .footer-col h4{color:#F4E9D8; font-family:'DM Serif Display',serif; font-size:0.92rem; margin:0 0 4px;}
+  footer a{text-decoration:none; color:#D9C9AC; font-size:0.85rem;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12); padding-top:18px; justify-content:center;
+    font-size:0.8rem; color:#B39F7E;
+  }
+
+  /* CART DRAWER */
+  .drawer-overlay{
+    position:fixed; inset:0; background:rgba(20,12,7,0.5); z-index:60;
+    opacity:0; visibility:hidden; transition:opacity 0.25s ease;
+  }
+  .drawer-overlay.open{opacity:1; visibility:visible;}
+
+  .cart-drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(420px, 100%);
+    background:var(--cream); z-index:61; box-shadow:-12px 0 40px rgba(0,0,0,0.18);
+    transform:translateX(100%); transition:transform 0.3s ease;
+    display:flex; flex-direction:column;
+  }
+  .cart-drawer.open{transform:translateX(0);}
+
+  .drawer-top{
+    position:relative; background:var(--crust); color:#F4E9D8;
+    padding:20px 22px 16px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .drawer-top h2{color:#F4E9D8; font-size:1.2rem;}
+  .drawer-top::after{
+    content:""; position:absolute; left:0; right:0; bottom:-11px; height:12px;
+    background-image:
+      linear-gradient(135deg, var(--crust) 25%, transparent 25%) ,
+      linear-gradient(225deg, var(--crust) 25%, transparent 25%);
+    background-position: 0 0, 9px 0;
+    background-size: 18px 12px;
+    background-repeat: repeat-x;
+  }
+  .close-btn{
+    background:none; border:none; color:#F4E9D8; font-size:1.6rem; line-height:1;
+    padding:4px 8px;
+  }
+
+  .drawer-body{flex:1; overflow-y:auto; padding:24px 22px 12px;}
+  .empty-cart{color:var(--crust-soft); text-align:center; padding:40px 0; font-size:0.95rem;}
+
+  .cart-item{
+    display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .cart-item img{width:60px; height:60px; border-radius:10px; object-fit:cover; flex-shrink:0;}
+  .ci-info{flex:1; min-width:0;}
+  .ci-info .name{font-weight:600; font-size:0.92rem;}
+  .ci-info .unit-price{font-size:0.8rem; color:var(--crust-soft);}
+  .qty-row{display:flex; align-items:center; gap:10px; margin-top:6px;}
+  .qty-btn{
+    width:24px; height:24px; border-radius:50%; border:1px solid var(--line);
+    background:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;
+    font-size:0.9rem; padding:0;
+  }
+  .qty-val{font-weight:600; font-size:0.9rem; min-width:18px; text-align:center;}
+  .remove-btn{
+    background:none; border:none; color:var(--terracotta-dark); font-size:0.78rem;
+    text-decoration:underline; padding:0; margin-left:auto; align-self:flex-start;
+  }
+  .ci-subtotal{font-weight:700; font-family:'DM Serif Display',serif; white-space:nowrap; align-self:flex-start;}
+
+  .drawer-foot{
+    border-top:1px solid var(--line); padding:18px 22px 24px; background:var(--cream-card);
+  }
+  .total-row{
+    display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px;
+  }
+  .total-row span:first-child{font-weight:600; color:var(--crust-soft);}
+  .total-row span:last-child{font-size:1.3rem; font-family:'DM Serif Display',serif; font-weight:700; color:var(--crust);}
+
+  .field{margin-bottom:12px;}
+  .field label{display:block; font-size:0.82rem; font-weight:600; color:var(--crust-soft); margin-bottom:5px;}
+  .field input, .field textarea{
+    width:100%; border:1px solid var(--line); border-radius:10px; padding:10px 12px;
+    font-family:inherit; font-size:0.92rem; background:#fff; color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:54px;}
+
+  .fulfillment-fixed{
+    font-size:0.92rem; font-weight:600; color:var(--crust); padding:9px 0;
+  }
+  .fulfillment-options{display:flex; gap:10px;}
+  .fulfillment-option{
+    flex:1; display:flex; align-items:center; gap:7px; border:1px solid var(--line);
+    border-radius:10px; padding:9px 12px; font-size:0.88rem; font-weight:600; background:#fff;
+    cursor:pointer;
+  }
+  .fulfillment-option input{width:auto; margin:0;}
+
+  .send-btn{
+    width:100%; background:#25D366; color:#fff; border:none; border-radius:12px;
+    padding:14px; font-weight:700; font-size:0.98rem; display:flex; align-items:center;
+    justify-content:center; gap:8px; margin-top:6px;
+  }
+  .send-btn:hover{background:#1ebe5a;}
+  .send-btn:disabled{background:#A9B7A0; cursor:not-allowed;}
+  .form-hint{font-size:0.76rem; color:var(--crust-soft); margin-top:8px; text-align:center;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo-block">
+      <span class="logo">Dean's Dough</span>
+      <span class="logo-caption">Handcrafted Focaccia</span>
+    </a>
+    <ul class="nav-links">
+      <li class="hide-mobile"><a href="#top" id="navHomeLink">Home</a></li>
+      <li class="hide-mobile"><a href="#menu">Menu</a></li>
+      <li class="hide-mobile"><a href="#how">How it Works</a></li>
+      <li class="hide-mobile"><a href="#about">About</a></li>
+      <li>
+        <button class="cart-pill" id="cartToggleTop" aria-label="Open cart">
+          Cart <span class="cart-badge" id="cartCountTop">0</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<div id="statusBanner" class="status-banner" style="display:none;"></div>
+
+<section class="hero" id="top">
+  <div class="hero-overlay"></div>
+  <div class="hero-note">From Dough<br>To Barakah <span class="heart">♡</span></div>
+  <div class="hero-content">
+    <p class="fresh">Freshly Baked <span class="heart">♡</span></p>
+    <h1>FOCACCIA</h1>
+    <h2>Made With Love</h2>
+    <p class="desc">Handcrafted. Homemade.<br>Made just for you. <span class="heart-small">♡</span></p>
+    <div class="flavour-badge">
+      <svg class="fb-circle" viewBox="0 0 140 140"><circle cx="70" cy="70" r="66" fill="none" stroke="#fff" stroke-width="1.4" stroke-dasharray="3 4"/></svg>
+      <span class="fb-text">soft inside,<br>golden outside,<br>full of flavor.</span>
+      <span class="fb-heart">♡</span>
+      <svg class="fb-arrow" viewBox="0 0 60 60"><path d="M4 6c6 18 18 30 44 40" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M40 40l10 6-3 11" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</section>
+
+<section class="badge-row" id="badges">
+  <div class="wrap badge-grid">
+    <div class="badge-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21V9M12 9C12 5 9 3 6 3c0 4 1 7 6 6ZM12 13c0-4 3-6 6-6 0 4-1 7-6 6Z"/></svg>
+      <div><strong>Real Ingredients</strong><p>We use only quality ingredients.</p></div>
+    </div>
+    <div class="badge-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 21V11a8 8 0 0 1 16 0v10"/><path d="M4 21h16"/><path d="M9 21v-6a3 3 0 0 1 6 0v6"/></svg>
+      <div><strong>Small Batches</strong><p>Baked in small batches for the best texture.</p></div>
+    </div>
+    <div class="badge-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-2 3-4 5-4 8a4 4 0 0 0 8 0c0-3-2-5-4-8Z"/><path d="M12 21v-6"/></svg>
+      <div><strong>Rich in Flavour</strong><p>Golden outside, soft inside, full of flavour.</p></div>
+    </div>
+    <div class="badge-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7.5-4.7-10-9.3C.4 8 2 4.5 5.5 4c2-.3 3.7.7 6.5 3.3C14.8 4.7 16.5 3.7 18.5 4c3.5.5 5.1 4 3.5 7.7C19.5 16.3 12 21 12 21Z"/></svg>
+      <div><strong>Made with Love</strong><p>Made with care, served with love.</p></div>
+    </div>
+    <div class="badge-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="7" width="13" height="9"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="5.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
+      <div><strong>Delivery on Selected Days</strong><p>Check our Instagram for the delivery schedule.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="featured">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Fan Favourites</span>
+      <h2>What Everyone's Ordering</h2>
+    </div>
+    <div class="featured-grid" id="featuredGrid">
+      <div class="featured-card">
+        <img src="https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/1efea137-16fd-4cda-9949-50f6322d211d.webp" alt="Cherry Tomato Focaccia" />
+        <div class="fc-body"><h3>Cherry Tomato</h3><p class="fc-desc">Cherry tomato, herbs, extra virgin olive oil</p><p class="fc-price">S$12.00</p></div>
+      </div>
+      <div class="featured-card">
+        <img src="https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/60d2669f-ed9d-43d0-94b5-bfe00c2e7a6b.webp" alt="Brie Onion Focaccia" />
+        <div class="fc-body"><h3>Brie Onion</h3><p class="fc-desc">Brie cheese, red onions, herbs, extra virgin olive oil</p><p class="fc-price">S$14.00</p></div>
+      </div>
+      <div class="featured-card">
+        <img src="https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/499172d4-6e8d-4037-80f3-8cd5b44d3132.webp" alt="Wild Mushroom Focaccia" />
+        <div class="fc-body"><h3>Wild Mushroom</h3><p class="fc-desc">Wild mushroom, herbs, extra virgin olive oil</p><p class="fc-price">S$15.00</p></div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:32px;">
+      <a href="#menu" class="hero-cta" style="background:var(--crust);">View Full Menu →</a>
+    </div>
+  </div>
+</section>
+
+<section id="menu" style="display:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Fresh this week</span>
+      <h2>Our Focaccias</h2>
+      <p>6-inch = personal pan size. Some say good to share for two, some say can eat alone 😅</p>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<section id="how" class="how-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Ordering made simple</span>
+      <h2>How It Works</h2>
+      <p>We take orders by WhatsApp and payment by PayNow — no card details, no fuss.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Add to cart &amp; order</h3>
+        <p>Pick your focaccias, fill in your name and number, and tap "Place Order."</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>We confirm &amp; invoice</h3>
+        <p>We'll reply on WhatsApp with your order total and PayNow details.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Pay &amp; send proof</h3>
+        <p>Pay via PayNow, then send us a screenshot of the payment in the same chat.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Order in progress</h3>
+        <p>We'll confirm we've received it and let you know once your bake is on the way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about-text">
+      <span class="eyebrow">Our story</span>
+      <h2>Baked by hand, batch by batch</h2>
+      <p>Dean's Dough is a small home bakery making slow-fermented focaccia with real ingredients — no shortcuts, no preservatives. Every loaf is made to order, so it's as fresh as it gets.</p>
+      <a class="ig-link" href="https://www.instagram.com/ahmaddean" target="_blank" rel="noopener">Follow us on Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<section class="whatsapp-bar">
+  <div class="wrap">
+    <span>💬 Questions? Chat with us on WhatsApp</span>
+    <a href="https://wa.me/6591509134" target="_blank" rel="noopener" class="hero-cta">Message Us →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#menu">Menu</a>
+      <a href="#how">How it Works</a>
+      <a href="#about">About</a>
+    </div>
+    <div class="footer-col">
+      <h4>Information</h4>
+      <a href="#about">About Us</a>
+      <a href="https://wa.me/6591509134" target="_blank" rel="noopener">Ingredients</a>
+      <a href="https://wa.me/6591509134" target="_blank" rel="noopener">Storage &amp; Reheat</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="https://www.instagram.com/ahmaddean" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/6591509134" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Dean's Dough. All rights reserved.</span>
+  </div>
+</footer>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="drawer-top">
+    <h2>Your Order</h2>
+    <button class="close-btn" id="closeCart" aria-label="Close cart">×</button>
+  </div>
+  <div class="drawer-body" id="cartBody">
+    <p class="empty-cart">Your cart is empty. Add a focaccia to get started!</p>
+  </div>
+  <div class="drawer-foot" id="drawerFoot">
+    <div class="total-row"><span>Total</span><span id="drawerTotal">S$0.00</span></div>
+    <form id="orderForm">
+      <div class="field">
+        <label>How would you like your order?</label>
+        <div id="fulfillmentOptions"></div>
+      </div>
+      <div class="field" id="deliveryAddressField" style="display:none;">
+        <label for="custAddress">Delivery address</label>
+        <textarea id="custAddress" placeholder="Full delivery address"></textarea>
+      </div>
+      <div class="field">
+        <label for="custName">Your name</label>
+        <input id="custName" type="text" required placeholder="e.g. Sarah Lim" />
+      </div>
+      <div class="field">
+        <label for="custContact">Contact number</label>
+        <input id="custContact" type="tel" required placeholder="e.g. 9123 4567" />
+      </div>
+      <div class="field">
+        <label for="custNote">Note (optional)</label>
+        <textarea id="custNote" placeholder="Pickup date, allergies, etc."></textarea>
+      </div>
+      <button type="submit" class="send-btn" id="sendBtn">Review Order</button>
+      <p class="form-hint">You'll get a chance to check everything before it's submitted.</p>
+    </form>
+
+    <div id="orderReviewStep" style="display:none;">
+      <h3 style="margin-bottom:12px;">Review your order</h3>
+      <div id="reviewItemsList" style="margin-bottom:14px; font-size:0.9rem;"></div>
+      <div class="total-row" style="margin-bottom:14px;"><span>Total</span><span id="reviewTotal">S$0.00</span></div>
+      <div id="reviewDetails" style="font-size:0.88rem; color:var(--crust-soft); margin-bottom:18px; line-height:1.7;"></div>
+      <button class="send-btn" id="confirmOrderBtn" type="button">Confirm &amp; Place Order</button>
+      <button type="button" id="editOrderBtn" style="width:100%; margin-top:10px; background:none; border:none; color:var(--crust-soft); font-weight:600; text-decoration:underline; padding:8px;">← Edit details</button>
+    </div>
+
+    <div id="orderConfirmed" style="display:none; text-align:center; padding:10px 4px;">
+      <div style="font-size:2rem; margin-bottom:8px;">✅</div>
+      <h3 style="margin-bottom:8px;">Order received!</h3>
+      <div id="confirmedOrderNo" style="font-family:'DM Serif Display',serif; font-size:1.4rem; font-weight:700; color:var(--terracotta-dark); margin:10px 0; padding:10px 16px; background:#FBF4E8; border-radius:12px; display:inline-block;"></div>
+      <p style="color:var(--crust-soft); font-size:0.88rem; margin:10px 0 6px;">Quote this number for pickup or give your name. We'll WhatsApp you shortly with your invoice and PayNow details.</p>
+      <button class="btn-ghost" id="closeConfirmBtn" style="border:1px solid var(--line); border-radius:999px; padding:10px 20px; background:#fff; font-weight:600; margin-top:10px;">Close</button>
+    </div>
+  </div>
+</aside>
+
+<script>
+  const SUPABASE_URL = "https://jvczydqwyfamswsxxoab.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_o7eqBgzZ79bsjIPYzzWXXw_K69BM3b0";
+
+  /* PRODUCTS_START */
+  const products = [
+    {
+      id: "cherry-tomato",
+      name: "Cherry Tomato Focaccia",
+      price: 12.00,
+      ingredients: "Cherry tomato, herbs, extra virgin olive oil",
+      img: "https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/1efea137-16fd-4cda-9949-50f6322d211d.webp",
+      soldOut: false
+    },
+    {
+      id: "brie-onion",
+      name: "Brie Onion Focaccia",
+      price: 14.00,
+      ingredients: "Brie cheese, red onions, herbs, extra virgin olive oil",
+      img: "https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/60d2669f-ed9d-43d0-94b5-bfe00c2e7a6b.webp",
+      soldOut: false
+    },
+    {
+      id: "garlic-cheese",
+      name: "Garlic Cheese Focaccia",
+      price: 15.00,
+      ingredients: "Homemade garlic butter, cheddar cheese",
+      img: "https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/1283f735-c746-4fa8-b6b7-f630d814c2f3.webp",
+      soldOut: false
+    },
+    {
+      id: "triple-cheese",
+      name: "Tripple Cheese Focaccia",
+      price: 16.00,
+      ingredients: "Shredded red cheddar, diced cheddar, parmesan, herbs & olive oil",
+      img: "https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/dc30b5a7-63e8-4269-abce-ef2abd9ef14b.webp",
+      soldOut: false
+    },
+    {
+      id: "wild-mushroom",
+      name: "Wild Mushroom Focaccia",
+      price: 16.00,
+      ingredients: "King oyster, shiitake & button mushroom, herbs, garlic olive oil",
+      img: "https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/499172d4-6e8d-4037-80f3-8cd5b44d3132.webp",
+      soldOut: false
+    },
+    {
+      id: "tote-bag",
+      name: "Tote Bag",
+      price: 15.00,
+      ingredients: "Canvas tote bag, 35 x 40cm",
+      img: "https://nzuetpxpnwmqwgzecjgm.supabase.co/storage/v1/object/public/shop-images/b25d3092-6665-40ff-9b0a-861a21f10e8c/45e13593-f182-4a7b-84b6-9ed34f218eae.webp",
+      soldOut: false
+    }
+  ];
+  /* PRODUCTS_END */
+
+  let cart = {}; // id -> qty
+  let deliveryEnabled = false;
+  let ordersOpen = false;
+  let dailyCapacity = 60;
+  let totalOrderedToday = 0;
+  let orderingDisabled = false;
+
+  function sgtTodayStartUTC(){
+    const now = new Date();
+    const sgtNow = new Date(now.getTime() + 8*60*60*1000);
+    const y = sgtNow.getUTCFullYear(), m = sgtNow.getUTCMonth(), d = sgtNow.getUTCDate();
+    return new Date(Date.UTC(y, m, d, 0, 0, 0) - 8*60*60*1000).toISOString();
+  }
+
+  async function loadSettings(){
+    try{
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/store_settings?select=delivery_enabled,orders_open,daily_capacity&id=eq.1`, {
+        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
+      });
+      const data = await res.json();
+      const row = data[0] || {};
+      deliveryEnabled = !!row.delivery_enabled;
+      ordersOpen = !!row.orders_open;
+      dailyCapacity = row.daily_capacity || 60;
+    }catch(e){
+      deliveryEnabled = false; ordersOpen = false; dailyCapacity = 60;
+    }
+    renderFulfillmentUI();
+    await checkCapacity();
+  }
+
+  async function checkCapacity(){
+    totalOrderedToday = 0;
+    if (ordersOpen){
+      try{
+        const todayStart = sgtTodayStartUTC();
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?select=items_json&created_at=gte.${encodeURIComponent(todayStart)}`, {
+          headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
+        });
+        const rows = await res.json();
+        totalOrderedToday = rows.reduce((sum, o) => {
+          const items = o.items_json || [];
+          return sum + items.reduce((s,i) => s + (i.qty||0), 0);
+        }, 0);
+      }catch(e){
+        console.error("Could not check today's order count:", e);
+      }
+    }
+    orderingDisabled = !ordersOpen || (totalOrderedToday >= dailyCapacity);
+    updateStatusBanner();
+    renderGrid();
+  }
+
+  function updateStatusBanner(){
+    const banner = document.getElementById("statusBanner");
+    if (!ordersOpen){
+      banner.style.display = "block";
+      banner.className = "status-banner closed";
+      banner.textContent = "We're not taking orders right now — check back soon!";
+    } else if (totalOrderedToday >= dailyCapacity){
+      banner.style.display = "block";
+      banner.className = "status-banner soldout";
+      banner.textContent = "We've reached today's order limit — thank you for the love! Please check back another day.";
+    } else {
+      banner.style.display = "none";
+    }
+  }
+
+  function renderFulfillmentUI(){
+    const wrap = document.getElementById("fulfillmentOptions");
+    if (!deliveryEnabled){
+      wrap.innerHTML = `<div class="fulfillment-fixed">🚶 Pickup only</div>`;
+      document.getElementById("deliveryAddressField").style.display = "none";
+      return;
+    }
+    wrap.innerHTML = `
+      <div class="fulfillment-options">
+        <label class="fulfillment-option"><input type="radio" name="fulfillment" value="Pickup" checked> 🚶 Pickup</label>
+        <label class="fulfillment-option"><input type="radio" name="fulfillment" value="Delivery"> 🚚 Delivery</label>
+      </div>
+    `;
+    wrap.querySelectorAll('input[name="fulfillment"]').forEach(r => {
+      r.addEventListener("change", () => {
+        document.getElementById("deliveryAddressField").style.display = (r.value === "Delivery" && r.checked) ? "block" : "none";
+      });
+    });
+  }
+
+  const fmt = (n) => "S$" + n.toFixed(2);
+
+  function renderGrid(){
+    const grid = document.getElementById("productGrid");
+    grid.innerHTML = products.map(p => {
+      const unavailable = p.soldOut || orderingDisabled;
+      return `
+      <div class="card${unavailable ? ' sold-out' : ''}">
+        <div class="card-img">
+          <img src="${p.img}" alt="${p.name}" loading="lazy" />
+          ${p.soldOut ? '<span class="sold-out-badge">Sold Out</span>' : ''}
+        </div>
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <p class="card-ingredients">${p.ingredients}</p>
+          <div class="card-footer">
+            <span class="price">${fmt(p.price)}</span>
+            ${unavailable ? '' : `
+            <div class="qty-stepper" data-id="${p.id}">
+              <button class="step-btn" data-step="dec" aria-label="Decrease quantity">−</button>
+              <span class="step-val">1</span>
+              <button class="step-btn" data-step="inc" aria-label="Increase quantity">+</button>
+            </div>`}
+          </div>
+          ${p.soldOut
+            ? '<button class="add-btn" disabled>Sold Out</button>'
+            : orderingDisabled
+              ? '<button class="add-btn" disabled>Unavailable</button>'
+              : `<button class="add-btn" data-id="${p.id}">Add to Cart</button>`}
+        </div>
+      </div>
+    `;
+    }).join("");
+
+    grid.querySelectorAll(".qty-stepper").forEach(stepper => {
+      const valEl = stepper.querySelector(".step-val");
+      stepper.querySelector('[data-step="inc"]').addEventListener("click", () => {
+        valEl.textContent = Math.min(99, parseInt(valEl.textContent) + 1);
+      });
+      stepper.querySelector('[data-step="dec"]').addEventListener("click", () => {
+        valEl.textContent = Math.max(1, parseInt(valEl.textContent) - 1);
+      });
+    });
+
+    grid.querySelectorAll(".add-btn:not([disabled])").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.id;
+        const card = btn.closest(".card");
+        const valEl = card.querySelector(".step-val");
+        const qty = valEl ? parseInt(valEl.textContent) : 1;
+        cart[id] = (cart[id] || 0) + qty;
+        renderCart();
+        if (valEl) valEl.textContent = "1";
+        btn.textContent = "Added ✓";
+        btn.classList.add("added");
+        setTimeout(() => { btn.textContent = "Add to Cart"; btn.classList.remove("added"); }, 900);
+      });
+    });
+  }
+
+  function cartTotal(){
+    return Object.entries(cart).reduce((sum, [id, qty]) => {
+      const p = products.find(p => p.id === id);
+      return sum + (p ? p.price * qty : 0);
+    }, 0);
+  }
+
+  function cartCount(){
+    return Object.values(cart).reduce((a,b) => a+b, 0);
+  }
+
+  function renderCart(){
+    const count = cartCount();
+    const total = cartTotal();
+
+    document.getElementById("cartCountTop").textContent = count;
+    document.getElementById("drawerTotal").textContent = fmt(total);
+
+    const body = document.getElementById("cartBody");
+    const entries = Object.entries(cart).filter(([,qty]) => qty > 0);
+
+    if (entries.length === 0){
+      body.innerHTML = `<p class="empty-cart">Your cart is empty. Add a focaccia to get started!</p>`;
+      document.getElementById("sendBtn").disabled = true;
+      return;
+    }
+    document.getElementById("sendBtn").disabled = false;
+
+    body.innerHTML = entries.map(([id, qty]) => {
+      const p = products.find(p => p.id === id);
+      return `
+        <div class="cart-item" data-id="${id}">
+          <img src="${p.img}" alt="${p.name}" />
+          <div class="ci-info">
+            <div class="name">${p.name}</div>
+            <div class="unit-price">${fmt(p.price)} each</div>
+            <div class="qty-row">
+              <button class="qty-btn" data-action="dec" aria-label="Decrease quantity">−</button>
+              <span class="qty-val">${qty}</span>
+              <button class="qty-btn" data-action="inc" aria-label="Increase quantity">+</button>
+              <button class="remove-btn" data-action="remove">Remove</button>
+            </div>
+          </div>
+          <div class="ci-subtotal">${fmt(p.price * qty)}</div>
+        </div>
+      `;
+    }).join("");
+
+    body.querySelectorAll(".cart-item").forEach(row => {
+      const id = row.dataset.id;
+      row.querySelector('[data-action="inc"]').addEventListener("click", () => {
+        cart[id]++; renderCart();
+      });
+      row.querySelector('[data-action="dec"]').addEventListener("click", () => {
+        cart[id] = Math.max(0, cart[id]-1);
+        if (cart[id] === 0) delete cart[id];
+        renderCart();
+      });
+      row.querySelector('[data-action="remove"]').addEventListener("click", () => {
+        delete cart[id]; renderCart();
+      });
+    });
+  }
+
+  function openCart(){
+    document.getElementById("cartDrawer").classList.add("open");
+    document.getElementById("drawerOverlay").classList.add("open");
+    if (document.getElementById("orderConfirmed").style.display === "block"){
+      document.getElementById("orderConfirmed").style.display = "none";
+      document.getElementById("orderForm").style.display = "block";
+    }
+    if (document.getElementById("orderReviewStep").style.display === "block"){
+      document.getElementById("orderReviewStep").style.display = "none";
+      document.getElementById("orderForm").style.display = "block";
+    }
+  }
+  function closeCart(){
+    document.getElementById("cartDrawer").classList.remove("open");
+    document.getElementById("drawerOverlay").classList.remove("open");
+  }
+
+  document.getElementById("cartToggleTop").addEventListener("click", openCart);
+  document.getElementById("closeCart").addEventListener("click", closeCart);
+  document.getElementById("drawerOverlay").addEventListener("click", closeCart);
+
+  const NTFY_TOPIC = "deansdough-orders-7f3k2x9";
+  const NTFY_SERVER = "https://ntfy.sh";
+
+  async function sendNtfyAlert(name, contact, itemsText, total, fulfillmentMode, orderNumber){
+    try{
+      const body = `Order ${orderNumber}\n${name} | ${contact}\n${itemsText}\nTotal: S$${Number(total).toFixed(2)}\n${fulfillmentMode === "Delivery" ? "Delivery" : "Pickup"}`;
+      await fetch(`${NTFY_SERVER}/${NTFY_TOPIC}`, {
+        method: "POST",
+        mode: "no-cors",
+        body: body
+      });
+    }catch(err){
+      console.error("ntfy alert failed (order still saved):", err);
+    }
+  }
+
+  async function generateOrderNumber(){
+    const now = new Date();
+    const sgt = new Date(now.getTime() + 8*60*60*1000);
+    const dd = String(sgt.getUTCDate()).padStart(2,'0');
+    const mm = String(sgt.getUTCMonth()+1).padStart(2,'0');
+    const prefix = `${dd}${mm}`;
+
+    // Atomic counter via Postgres RPC — avoids duplicate numbers when two orders come in close together
+    try{
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/next_order_seq`, {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ p_day_key: prefix })
+      });
+      const seqNum = await res.json();
+      const seq = String(seqNum).padStart(3,'0');
+      return `${prefix}-${seq}`;
+    }catch(err){
+      // Fallback to random if RPC fails
+      const fallback = String(Math.floor(Math.random()*999)+1).padStart(3,'0');
+      return `${prefix}-${fallback}`;
+    }
+  }
+
+  async function saveOrderToDatabase(itemsText, itemsJson, name, contact, note, total, fulfillmentMode, deliveryAddress){
+    const orderNumber = await generateOrderNumber();
+    try{
+      await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify({
+          customer_name: name,
+          customer_contact: contact,
+          items_text: itemsText,
+          items_json: itemsJson,
+          total: total,
+          note: note || null,
+          fulfillment_mode: fulfillmentMode,
+          delivery_address: fulfillmentMode === "Delivery" ? deliveryAddress : null,
+          order_number: orderNumber,
+          status_history: [{ status: "New", time: new Date().toISOString() }]
+        })
+      });
+      sendNtfyAlert(name, contact, itemsText, total, fulfillmentMode, orderNumber);
+    }catch(err){
+      console.error("Could not save order to database (continuing anyway):", err);
+    }
+    return orderNumber;
+  }
+
+  let pendingOrder = null;
+
+  document.getElementById("orderForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const entries = Object.entries(cart).filter(([,qty]) => qty > 0);
+    if (entries.length === 0) return;
+
+    const name = document.getElementById("custName").value.trim();
+    const contact = document.getElementById("custContact").value.trim();
+    const note = document.getElementById("custNote").value.trim();
+
+    const fulfillmentInput = document.querySelector('input[name="fulfillment"]:checked');
+    const fulfillmentMode = deliveryEnabled && fulfillmentInput ? fulfillmentInput.value : "Pickup";
+    const deliveryAddress = document.getElementById("custAddress").value.trim();
+
+    if (!name || !contact){
+      alert("Please fill in your name and contact number.");
+      return;
+    }
+    if (fulfillmentMode === "Delivery" && !deliveryAddress){
+      alert("Please enter your delivery address.");
+      return;
+    }
+
+    const itemsTextPlain = entries.map(([id, qty]) => {
+      const p = products.find(p => p.id === id);
+      return `${qty}x ${p.name} (${fmt(p.price * qty)})`;
+    }).join("\n");
+    const itemsJson = entries.map(([id, qty]) => {
+      const p = products.find(p => p.id === id);
+      return { product_id: id, name: p.name, qty: qty, price: p.price };
+    });
+    const total = cartTotal();
+
+    pendingOrder = { name, contact, note, fulfillmentMode, deliveryAddress, itemsTextPlain, itemsJson, total };
+
+    document.getElementById("reviewItemsList").innerHTML = entries.map(([id, qty]) => {
+      const p = products.find(p => p.id === id);
+      return `<div style="display:flex; justify-content:space-between; padding:4px 0;"><span>${qty}x ${p.name}</span><span>${fmt(p.price*qty)}</span></div>`;
+    }).join("");
+    document.getElementById("reviewTotal").textContent = fmt(total);
+
+    let detailsHtml = `<strong>Name:</strong> ${name}<br><strong>Contact:</strong> ${contact}<br><strong>Fulfillment:</strong> ${fulfillmentMode}`;
+    if (fulfillmentMode === "Delivery") detailsHtml += `<br><strong>Address:</strong> ${deliveryAddress}`;
+    if (note) detailsHtml += `<br><strong>Note:</strong> ${note}`;
+    document.getElementById("reviewDetails").innerHTML = detailsHtml;
+
+    document.getElementById("orderForm").style.display = "none";
+    document.getElementById("orderReviewStep").style.display = "block";
+  });
+
+  document.getElementById("editOrderBtn").addEventListener("click", () => {
+    document.getElementById("orderReviewStep").style.display = "none";
+    document.getElementById("orderForm").style.display = "block";
+  });
+
+  document.getElementById("confirmOrderBtn").addEventListener("click", async () => {
+    if (!pendingOrder) return;
+    const confirmBtn = document.getElementById("confirmOrderBtn");
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = "Checking availability…";
+    await checkCapacity();
+
+    const cartUnits = pendingOrder.itemsJson.reduce((s,i) => s+i.qty, 0);
+    if (!ordersOpen){
+      alert("Sorry, we're not taking orders right now.");
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = "Confirm & Place Order";
+      return;
+    }
+    if (totalOrderedToday + cartUnits > dailyCapacity){
+      const remaining = Math.max(0, dailyCapacity - totalOrderedToday);
+      alert(remaining > 0
+        ? `Sorry, only ${remaining} more bread(s) left for today. Please reduce your quantity.`
+        : `Sorry, we just reached today's order limit. Please check back another day.`);
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = "Confirm & Place Order";
+      return;
+    }
+
+    confirmBtn.textContent = "Placing order…";
+    const o = pendingOrder;
+    const orderNumber = await saveOrderToDatabase(o.itemsTextPlain, o.itemsJson, o.name, o.contact, o.note, o.total, o.fulfillmentMode, o.deliveryAddress);
+
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = "Confirm & Place Order";
+    pendingOrder = null;
+
+    // Show order number on confirmation screen
+    document.getElementById("confirmedOrderNo").textContent = `Order No. ${orderNumber}`;
+
+    // Reset cart and form, show confirmation
+    cart = {};
+    renderCart();
+    renderGrid();
+    document.getElementById("orderForm").reset();
+    document.getElementById("deliveryAddressField").style.display = "none";
+    document.getElementById("orderReviewStep").style.display = "none";
+    document.getElementById("orderConfirmed").style.display = "block";
+    checkCapacity();
+  });
+
+  document.getElementById("closeConfirmBtn").addEventListener("click", () => {
+    document.getElementById("orderConfirmed").style.display = "none";
+    document.getElementById("orderForm").style.display = "block";
+    closeCart();
+  });
+
+  async function renderFeatured(){
+    const grid = document.getElementById("featuredGrid");
+    if (!grid) return;
+    let tally = {};
+    try{
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?select=items_json`, {
+        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
+      });
+      const rows = await res.json();
+      rows.forEach(o => (o.items_json || []).forEach(i => {
+        tally[i.name] = (tally[i.name] || 0) + (i.qty || 0);
+      }));
+    }catch(e){
+      console.error("Could not load sales data for featured section:", e);
+    }
+
+    // Only focaccias are eligible to be featured (skip things like the tote bag)
+    const eligible = products.filter(p => p.name.toLowerCase().includes("focaccia"));
+    const ranked = eligible.slice().sort((a, b) => (tally[b.name] || 0) - (tally[a.name] || 0));
+    const top3 = ranked.slice(0, 3);
+
+    grid.innerHTML = top3.map(p => `
+      <div class="featured-card">
+        <img src="${p.img}" alt="${p.name}" />
+        <div class="fc-body">
+          <h3>${p.name.replace(" Focaccia", "")}</h3>
+          <p class="fc-desc">${p.ingredients}</p>
+          <p class="fc-price">S$${p.price.toFixed(2)}</p>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  loadSettings();
+  setInterval(loadSettings, 30000);
+
+  renderGrid();
+  renderCart();
+  renderFeatured();
+
+  /* Menu behaves like a dedicated page: hidden by default (see inline style on #menu), only shown on click */
+  const HOME_SECTION_IDS = ["top", "badges", "featured", "how", "about"];
+  function showMenuPage(){
+    HOME_SECTION_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = "none";
+    });
+    document.getElementById("menu").style.display = "";
+    window.scrollTo(0, 0);
+  }
+  function showHomeSection(targetId){
+    HOME_SECTION_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = "";
+    });
+    document.getElementById("menu").style.display = "none";
+    if (targetId && targetId !== "top"){
+      setTimeout(() => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+      }, 30);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const targetId = link.getAttribute("href").slice(1);
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (targetId === "menu"){
+        showMenuPage();
+      } else {
+        showHomeSection(targetId);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
